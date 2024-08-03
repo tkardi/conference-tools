@@ -173,9 +173,9 @@ def process_day(day, conf_prefix, videos):
             hashtags_list = [CONF_HASHTAG, type_hashtag, to_hashtag(talk['track'])]
             hashtags = '\\n'.join(hashtags_list)
 
-            date = datetime.strptime(talk["date"], '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y %H:%M:%S')
+            talk_time = datetime.strptime(talk["date"], '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y %H:%M:%S')
 
-            description = f'\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {date}\\n\\n{hashtags}'
+            description = f'\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {talk_time}\\n\\n{hashtags}'
 
             abstract = markdown_renderer(text_to_length(talk['abstract'], 5000, len(description))).strip("\\n")
 
