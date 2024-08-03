@@ -106,7 +106,7 @@ def main(data=None):
         )
         return 2
 
-    parsed = json.loads(data)
+#    parsed = json.loads(data)
     try:
         parsed = json.loads(data)
     except:
