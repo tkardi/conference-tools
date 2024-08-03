@@ -150,6 +150,7 @@ def process_day(day, conf_prefix, videos):
                 video_file = 'ERROR: no video file found'
 
             title = f'{TITLE_PREFIX} | {talk["title"]}'
+            title = text_to_length(title, 100)
 
             persons_list = unique([person['public_name'] for person in talk['persons']])
             if talk_id in ADDITIONAL_PERSONS:
@@ -184,7 +185,7 @@ def process_day(day, conf_prefix, videos):
                 'video_file': video_file,
                 'persons': ', '.join(persons_list),
                 'pretalx_id': talk_id,
-                'title': text_to_length(title, 100),
+                'title': title.replace("'", "&apos;"),
                 'description': description.replace("'", "&apos;"),
             }
 
