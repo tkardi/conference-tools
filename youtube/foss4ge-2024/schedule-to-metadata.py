@@ -71,7 +71,7 @@ def to_hashtag(data):
     else:
         return '#' + ''.join(x for x in data.title() if not x.isspace() and x.isalnum())
 
-def process_file_list(video_files_list):
+def process_file_list(video_files_list, rooms):
     '''Convert a list of files into a nested dictionary.'''
     result = defaultdict(lambda: defaultdict(dict))
     with open(video_files_list) as video_files:
@@ -80,6 +80,8 @@ def process_file_list(video_files_list):
             pretalx_link, video_file = row.split(';')
             pretalx_id = PurePath(pretalx_link).parts[-1]
             day, room = PurePath(video_file).parts[-3:-1]
+            if rooms != None and room not in rooms:
+                continue
             result[day][room][pretalx_id] = video_file.strip()
     return result
 
@@ -113,13 +115,15 @@ def text_to_length(text, max_length, post_length=0):
     return f"{text[:break_on]}{fill_in}"
 
 
-def process_day(day, conf_prefix, videos):
+def process_day(day, conf_prefix, videos, rooms):
     date = day['date']
     for room in day['rooms']:
         if room in ['General online', 'Academic online']:
             continue
 
         room_name = ROOM_MAPPING[room]
+        if rooms != None and room_name not in rooms:
+            continue 
 
         # An offset for the case that a talk wasn't recorded or the file is not
         # found.
@@ -177,7 +181,7 @@ def process_day(day, conf_prefix, videos):
 
             description = f'\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {talk_time}\\n\\n{hashtags}'
 
-            abstract = markdown_renderer(text_to_length(talk['abstract'], 5000, len(description))).strip("\\n")
+            abstract = markdown_renderer(text_to_length(talk['abstract'], 5000, len(description))).strip()
 
             description = f'{abstract}{description}'
 
@@ -193,8 +197,10 @@ def process_day(day, conf_prefix, videos):
 
 
 def main(**kwargs):
+    rooms = kwargs['these_rooms_only']
+    days = kwargs['these_days_only']
 
-    videos = process_file_list(kwargs['videofiles_list'])
+    videos = process_file_list(kwargs['videofiles_list'], rooms)
 
     for schedule_filename in kwargs['schedule']:
         if not os.path.exists(schedule_filename):
@@ -215,7 +221,9 @@ def main(**kwargs):
         conf_prefix = schedule_json['schedule']['conference']['acronym']
         schedule_days = schedule_json['schedule']['conference']['days']
         for schedule_day in schedule_days:
-            process_day(schedule_day, conf_prefix, videos)
+            if days != None and schedule_day['date'] not in days:
+                continue
+            process_day(schedule_day, conf_prefix, videos, rooms)
 
         #print(conference_day1)
 
@@ -231,6 +239,18 @@ if __name__ == '__main__':
         "-v", "--videofiles-list",
         help="Path to preformatted list of videofiles.",
         required=True
+    )
+    parser.add_argument(
+        "-d", "--these-days-only",
+        help="Space-delimited list of ISO days to process",
+        nargs="+",
+        required=False
+    )
+    parser.add_argument(
+        "-r", "--these-rooms-only",
+        help="Space-delimited list of of roomnames (used in filepaths) to process",
+        nargs="+",
+        required=False
     )
     parser.add_argument(
         "-c", "--cache-schedule",
