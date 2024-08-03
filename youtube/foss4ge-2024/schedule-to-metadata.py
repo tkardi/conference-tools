@@ -5,6 +5,7 @@
 
 import json, os, sys, unicodedata
 from collections import defaultdict
+from datetime import datetime
 from pathlib import PurePath
 from urllib import parse, request
 import re
@@ -21,7 +22,7 @@ CONF_HASHTAG = '#foss4ge2024'
 ACADEMICTRACK_NAME = "Academic track"
 # The keys match the conference acronym of the schedule.
 TYPE_HASHTAG = {
-    'foss4g-europe-2024': '#generaltrack',
+    'foss4g-europe-2024': '#GeneralTrack',
 }
 # List of that talks that were not recorded or presented.
 TALKS_MISSING = [
@@ -82,6 +83,36 @@ def process_file_list(video_files_list):
             result[day][room][pretalx_id] = video_file.strip()
     return result
 
+def text_to_length(text, max_length, post_length=0):
+    """Chop title / description text to length
+
+    Takes max_length - post_length trims the input text to that and then
+    rfinds the first whitespace and concats fill_in chars (like " ...").
+
+    E.g only max_length characters for title are allowed. There will be no
+    trailing chars added after (for Title value).
+
+    >>> text_to_length("A very long title. Which must be shortened", 25)
+    'A very long title. ...'
+    >>>
+
+    For description reserve some space (post_length) to the end, e.g for
+    hashtags.
+
+    >>> text_to_length("A very long title. Which must be shortened", 25, 10)
+    'A very ...'
+    >>>
+    """
+    if len(text) <= max_length + post_length:
+        return text
+    fill_in = " ..."
+    allowed_length = max_length - post_length - len(fill_in)
+    break_on = text[:allowed_length].rfind(' ')
+    if break_on == -1:
+        break_on = allowed_length
+    return f"{text[:break_on]}{fill_in}"
+
+
 def process_day(day, conf_prefix, videos):
     date = day['date']
     for room in day['rooms']:
@@ -126,7 +157,7 @@ def process_day(day, conf_prefix, videos):
             persons = '\\n'.join(persons_list)
 
             markdown_renderer = mistune.create_markdown(renderer=YouTubeRenderer())
-            abstract = markdown_renderer(talk['abstract']).strip()
+
 
             pretalx_link = ensure_https(talk['url'])
 
@@ -141,16 +172,20 @@ def process_day(day, conf_prefix, videos):
             hashtags_list = [CONF_HASHTAG, type_hashtag, to_hashtag(talk['track'])]
             hashtags = '\\n'.join(hashtags_list)
 
+            date = datetime.strptime(talk["date"], '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y %H:%M:%S')
 
+            description = f'\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {date}\\n\\n{hashtags}'
 
-            description = f'{abstract}\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {talk["date"]}\\n\\n{hashtags}'
+            abstract = markdown_renderer(text_to_length(talk['abstract'], 5000, len(description))).strip("\\n")
+
+            description = f'{abstract}{description}'
 
             metadata = {
                 'video_file': video_file,
                 'persons': ', '.join(persons_list),
                 'pretalx_id': talk_id,
-                'title': title,
-                'description': description,
+                'title': text_to_length(title, 100),
+                'description': description.replace("'", "&apos;"),
             }
 
             print(json.dumps(metadata))
@@ -159,7 +194,7 @@ def process_day(day, conf_prefix, videos):
 def main(**kwargs):
 
     videos = process_file_list(kwargs['videofiles_list'])
-    print (videos)
+
     for schedule_filename in kwargs['schedule']:
         if not os.path.exists(schedule_filename):
             assert schedule_filename.startswith('http://') or schedule_filename.startswith('https://'), \
