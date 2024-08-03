@@ -48,7 +48,7 @@ def upload_video(token, title, description, file_path):
 
     body = Video(
         snippet=VideoSnippet(
-            title=title,
+            title=title.replace("&apos;", "'"),
             description=description.replace("&apos;", "'"),
         ),
         status=VideoStatus(
