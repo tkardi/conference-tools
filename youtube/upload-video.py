@@ -33,14 +33,32 @@ from pyyoutube.media import Media
 from pyyoutube.models import Video, VideoSnippet, VideoStatus
 
 
+def print_progress_bar(progress, total):
+    """A simplistic progress bar"""
+    print(f'\r{round((progress/total)*100,0)} %', end='\r')
+    if progress == total:
+        print()
+
 def upload_video(token, title, description, file_path):
     """Uploads a video to YouTube."""
+    print(
+        f"Uploading ideo file `{file_path}`
+    )
     cli = Client(access_token=token)
 
     body = Video(
-        snippet=VideoSnippet(title=title, description=description),
-        status=VideoStatus(privacyStatus="private"),
+        snippet=VideoSnippet(
+            title=title,
+            description=description.replace("&apos;", "'"),
+        ),
+        status=VideoStatus(
+            privacyStatus="private",
+            license="creativeCommon"
+        ),
     )
+    if os.path.exists(file_path) == False:
+        # @tkardi 2.08.2024: maybe the filename has unescaped spaces
+        file_path = r"" + file_path
     media = Media(filename=file_path)
 
     upload = cli.videos.insert(
@@ -51,15 +69,18 @@ def upload_video(token, title, description, file_path):
     )
 
     response = None
+
     while response is None:
-        print(f"Uploading video...")
+        #print(f"Uploading video...")
         status, response = upload.next_chunk()
         if status is not None:
-            print(f"Uploading video progress: {status.progress()}...")
+#            print(f"Uploading video progress: {status.progress()}...")
+            print_progress_bar(round(status.progress() * 100, 0), 100)
 
     video = Video.from_dict(response)
+
     print(
-        f"Video file `{file_path}` was successfully uploaded to https://youtu.be/{video.id}"
+        f"\nVideo file `{file_path}` was successfully uploaded to https://youtu.be/{video.id}"
     )
 
 
