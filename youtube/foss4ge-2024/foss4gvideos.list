@@ -56,8 +56,8 @@ https://talks.osgeo.org/foss4g-europe-2024/talk/CZTZ3F/;./2024-07-04/GEOCAT/Joac
 https://talks.osgeo.org/foss4g-europe-2024/talk/FDLWYB/;./2024-07-04/GEOCAT/Jonathan_Lurie-Web Mapping 101 Getting started using MapTiler SDK!.mp4
 https://talks.osgeo.org/foss4g-europe-2024/talk/BWXW7Q/;./2024-07-04/GEOCAT/Katre_Kasemägi-GIS services for public safety with open source GIS software.mp4
 https://talks.osgeo.org/foss4g-europe-2024/talk/3ZDYRX/;./2024-07-04/GEOCAT/Kylli-LUMI supercomputer for spatial data analysis, especially deep learning.mp4
-https://talks.osgeo.org/foss4g-europe-2024/talk/HTLEJN/;./2024-07-04/GEOCAT/Mcal_Bojkoi-Cloudferro's open source QGIS plugin for discovery of Copernicus data.mp4"
-https://talks.osgeo.org/foss4g-europe-2024/talk/JSYPEE/;./2024-07-04/GEOCAT/Miriam_Gonzalez-What's up in Space.mp4.crdownload"
+https://talks.osgeo.org/foss4g-europe-2024/talk/HTLEJN/;./2024-07-04/GEOCAT/Mcal_Bojkoi-Cloudferro's open source QGIS plugin for discovery of Copernicus data.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/JSYPEE/;./2024-07-04/GEOCAT/Miriam_Gonzalez-What's up in Space.mp4.crdownload
 https://talks.osgeo.org/foss4g-europe-2024/talk/8HKQSE/;./2024-07-04/GEOCAT/Naman-dsm2dtm Generate DTM from DSM for free!.mp4
 https://talks.osgeo.org/foss4g-europe-2024/talk/8JDDX3/;./2024-07-04/GEOCAT/Stathis_Petridis-Q-MOKA A QGIS-Based Application for Managing and Analyzing Traffic Accidents.mp4
 https://talks.osgeo.org/foss4g-europe-2024/talk/EA7TMX/;./2024-07-04/GEOCAT/Walter_Lorenzetti-G3W-SUITE and QGIS integration state of the art, latest developments and future prospects.mp4
@@ -67,3 +67,37 @@ https://talks.osgeo.org/foss4g-europe-2024/talk/AFTRTG/;./2024-07-05/GEOCAT/ivan
 https://talks.osgeo.org/foss4g-europe-2024/talk/QBSFRX/;./2024-07-05/GEOCAT/Luke-Routing for Golf-Carts and other Low-Speed Vehicles using Valhalla.mp4
 https://talks.osgeo.org/foss4g-europe-2024/talk/G7BDQZ/;./2024-07-05/GEOCAT/Pekka_Sarkola-Managing airport data with Open Source Software.mp4
 https://talks.osgeo.org/foss4g-europe-2024/talk/VMUTKB/;./2024-07-05/GEOCAT/Tambet_Matiisen-Tartu Pioneering the Future of Self-Driving Technology with Open Source and Open Data.mp4 Data.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/J7NLAK/;./2024-07-03/LAStools/Andrea Aime-Vector Mosaicking with GeoServer.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/9DRDLV/;./2024-07-03/LAStools/Brandon Liu-Open Source vs. Open Core for the Protomaps Project.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/H7SN38/;./2024-07-03/LAStools/ivan sanchez-Gleo Feature Frenzy.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/FMDZFK/;./2024-07-03/LAStools/Jakob Miksch-pg_featureserv - Publication of vector data with OGC API features.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/XN7BPG/;./2024-07-03/LAStools/Jakob Miksch-QGIS Server in an enterprise environment.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/QC8L7A/;./2024-07-03/LAStools/Markus Tremmel-MapLibre Tiles_ Introducing The Next Generation Vector Tiles Format.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/NMQQUE/;./2024-07-03/LAStools/Petra Duriancikova, Nicolas Bozon-Vector Tiles Cartography Elevate your maps with JSON tricks.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/XKSKE7/;./2024-07-03/LAStools/Riku Oja, Sanna Jokela-Complexity of Land use planning - simplicity from FOSS4G.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/EHKHAM/;./2024-07-03/LAStools/Tomáš Pohanka-OpenMapTiles - vector tiles from OpenStreetMap & Natural Earth Data.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/GHRLE3/;./2024-07-04/LAStools/Alexandre Gacon-Manage GeoServer configuration with Terraform.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/PALXJP/;./2024-07-04/LAStools/Andrea Aime, Peter Rushforth-Add a map tag in HTML MapML developments and support in GeoServer.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/YMU3UV/;./2024-07-04/LAStools/Astrid Emde-Mapbender 4.0 - create applications for your needs with the new version.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/C7JF9M/;./2024-07-04/LAStools/Giovanni Allegri-GeoNode at work how do I do this, how do I do that.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/B77FJF/;./2024-07-04/LAStools/Jakob Miksch-Geospatial Go.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/FH8R7J/;./2024-07-04/LAStools/James Milner-Terra Draw A web map drawing library for 2024.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/E37APS/;./2024-07-04/LAStools/Joana Simoes-Creating Interoperable Tiled Maps.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/7XCA3K/;./2024-07-04/LAStools/krishna lodha-Creating GIS Rest APIS using Geodjango under 30 minutes.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/VFCZL3/;./2024-07-04/LAStools/Lorenzo Natali, Stefano Bovio-MapStore, a year in review.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/3CQF83/;./2024-07-04/LAStools/Saber Razmjooei, Martin Dobias-QGIS in your browser - QGIS WASM.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/WS9FAP/;./2024-07-04/LAStools/Walter Lorenzetti-G3W-SUITE and QGIS Processing API integration your geographic analysis models on the web.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/TRVMHY/;./2024-07-04/LAStools/Yuri Astrakhan-All MapLibre projects, present and future, in one status update.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/QZPNVA/;./2024-07-04/LAStools/Yves Bolognini-GeoMapFish Status.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/NSPYGB/;./2024-07-05/LAStools/Batuhan Kavlak-Cloud-Native Asset Model with STAC.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/N9ZHES/;./2024-07-05/LAStools/Dirk Stenger-State of deegree A mature server-side software for spatial data infrastructures.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/AWQLHH/;./2024-07-05/LAStools/Giovanni Allegr,Emanuele Tajariol- iState of GeoNode.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/NHBPHL/;./2024-07-05/LAStools/Helene Steiner, Lukas Nebel-Vector Tiles Spatial Selection with PyQGIS.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/ZRAMQR/;./2024-07-05/LAStools/Jakob Miksch-OpenLayers and Vue.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/FQN9J7/;./2024-07-05/LAStools/Külli Ek-Paituli STAC - experiences of setting up and using own STAC catalog.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/LPVEZD/;./2024-07-05/LAStools/Luke Seelenbinder-Stadia x Stamen A New Era for Stamen Map Tiles.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/VTUWHZ/;./2024-07-05/LAStools/Martin Menert-SATILADU – AN OPEN WEB MAP FOR ESTONIAN LAND USE AND LAND COVER DATA.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/3V7LED/;./2024-07-05/LAStools/Matthias Mohr-ol-stac STAC and OpenLayers combined.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/KBHC87/;./2024-07-05/LAStools/Milvari Alieva-Empowering Rapid Disaster Response with OpenAerialMap.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/GRKMVR/;./2024-07-05/LAStools/Seth Girvin-Enhance your MapServer Workflows with mappyfile.mp4
+https://talks.osgeo.org/foss4g-europe-2024/talk/MCY7UB/;./2024-07-05/LAStools/Sini Pöytäniemi-State of Oskari (for end-users).mp4
