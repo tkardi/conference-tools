@@ -24,7 +24,7 @@ from mistune import BaseRenderer, BlockState
 
 
 def strip_end(src: str) -> str:
-    return re.compile(r"\n\s+$").sub("\n", src)
+    return re.compile(r"\\n\s+$").sub("\\n", src)
 
 
 class ExtractHref(HTMLParser):
@@ -50,7 +50,7 @@ class YouTubeRenderer(BaseRenderer):
     ) -> str:
         out = self.render_tokens(tokens, state)
         # special handle for line breaks
-        out += "\n\n".join(self.render_referrences(state)) + "\n"
+        out += "\\n\\n".join(self.render_referrences(state)) + "\\n"
         return strip_end(out)
 
     def render_referrences(self, state: BlockState) -> Iterable[str]:
@@ -88,10 +88,10 @@ class YouTubeRenderer(BaseRenderer):
         return "`" + cast(str, token["raw"]) + "`"
 
     def linebreak(self, token: Dict[str, Any], state: BlockState) -> str:
-        return "\n"
+        return "\\n"
 
     def softbreak(self, token: Dict[str, Any], state: BlockState) -> str:
-        return "\n"
+        return "\\n"
 
     def blank_line(self, token: Dict[str, Any], state: BlockState) -> str:
         return ""
@@ -111,7 +111,7 @@ class YouTubeRenderer(BaseRenderer):
         elif tag in ["s", "del", "strike"]:
             return "-"
         elif tag == "br":
-            return "\n"
+            return "\\n"
         elif tag == "a":
             if token["raw"].startswith("</"):
                 return f" ({self.href})"
@@ -127,32 +127,32 @@ class YouTubeRenderer(BaseRenderer):
 
     def paragraph(self, token: Dict[str, Any], state: BlockState) -> str:
         text = self.render_children(token, state)
-        return text + "\n\n"
+        return text + "\\n\\n"
 
     def heading(self, token: Dict[str, Any], state: BlockState) -> str:
         level = cast(int, token["attrs"]["level"])
         marker = "#" * level
         text = self.render_children(token, state)
-        return marker + " " + text + "\n\n"
+        return marker + " " + text + "\\n\\n"
 
     def thematic_break(self, token: Dict[str, Any], state: BlockState) -> str:
-        return "***\n\n"
+        return "***\\n\\n"
 
     def block_text(self, token: Dict[str, Any], state: BlockState) -> str:
-        return self.render_children(token, state) + "\n"
+        return self.render_children(token, state) + "\\n"
 
     def block_code(self, token: Dict[str, Any], state: BlockState) -> str:
         attrs = token.get("attrs", {})
         info = cast(str, attrs.get("info", ""))
         code = cast(str, token["raw"])
-        return f"```{info}\n{code}```\n\n"
+        return f"```{info}\\n{code}```\\n\\n"
 
     def block_quote(self, token: Dict[str, Any], state: BlockState) -> str:
         text = indent(self.render_children(token, state), "> ")
-        return text + "\n\n"
+        return text + "\\n\\n"
 
     def block_html(self, token: Dict[str, Any], state: BlockState) -> str:
-        return cast(str, token["raw"]) + "\n\n"
+        return cast(str, token["raw"]) + "\\n\\n"
 
     def block_error(self, token: Dict[str, Any], state: BlockState) -> str:
         return ""
@@ -175,8 +175,8 @@ def render_list(
     if parent:
         if parent["tight"]:
             return text
-        return text + "\n"
-    return strip_end(text) + "\n"
+        return text + "\\n"
+    return strip_end(text) + "\\n"
 
 
 def _render_list_item(
@@ -195,13 +195,13 @@ def _render_list_item(
         text += renderer.render_token(tok, state)
 
     lines = text.splitlines()
-    text = (lines[0] if lines else "") + "\n"
+    text = (lines[0] if lines else "") + "\\n"
     prefix = " " * len(leading)
     for line in lines[1:]:
         if line:
-            text += prefix + line + "\n"
+            text += prefix + line + "\\n"
         else:
-            text += "\n"
+            text += "\\n"
     return leading + text
 
 
