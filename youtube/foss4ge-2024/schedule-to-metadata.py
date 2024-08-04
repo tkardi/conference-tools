@@ -182,6 +182,8 @@ def process_day(day, conf_prefix, videos, rooms):
             description = f'\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {talk_time}\\n\\n{hashtags}'
 
             abstract = talk['abstract'].replace('\t', ' ' * 4)
+            abstract = abstract.replace('\r\n', '\n')
+            abstract = abstract.replace('\n', '\\n')
             abstract = text_to_length(abstract, 5000, len(description))
             abstract = markdown_renderer(abstract).strip()
 
