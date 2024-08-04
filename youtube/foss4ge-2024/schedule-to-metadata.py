@@ -123,7 +123,7 @@ def process_day(day, conf_prefix, videos, rooms):
 
         room_name = ROOM_MAPPING[room]
         if rooms != None and room_name not in rooms:
-            continue 
+            continue
 
         # An offset for the case that a talk wasn't recorded or the file is not
         # found.
@@ -181,12 +181,14 @@ def process_day(day, conf_prefix, videos, rooms):
 
             description = f'\\n\\n{persons}\\n\\n{pretalx_link}\\n\\nRoom: {room} @ {talk_time}\\n\\n{hashtags}'
 
-            abstract = markdown_renderer(text_to_length(talk['abstract'], 5000, len(description))).strip()
+            abstract = talk['abstract'].replace('\t', ' ' * 4)
+            abstract = text_to_length(abstract, 5000, len(description))
+            abstract = markdown_renderer(abstract).strip()
 
             description = f'{abstract}{description}'
 
             metadata = {
-                'video_file': video_file,
+                'video_file': video_file.replace("'", "&apos;"),
                 'persons': ', '.join(persons_list),
                 'pretalx_id': talk_id,
                 'title': title.replace("'", "&apos;"),
