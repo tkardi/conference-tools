@@ -41,8 +41,9 @@ def print_progress_bar(progress, total):
 
 def upload_video(token, title, description, file_path):
     """Uploads a video to YouTube."""
+    file_path = file_path.replace("&apos;", "'")
     print(
-        f"Uploading ideo file `{file_path}`
+        f"Uploading ideo file `{file_path}`"
     )
     cli = Client(access_token=token)
 
@@ -111,6 +112,9 @@ def main(data=None):
         parsed = json.loads(data)
     except:
         print("Cannot parse JSON input.")
+        print("----")
+        print(data)
+        print("----")
         return 3
 
     try:
