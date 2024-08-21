@@ -24,6 +24,11 @@
 # `./pipe-each-line.py` to process the whole file:
 #
 #     cat metadata.ndjson | YOUTUBE_ACCESS_TOKEN='ya29.a0AXooCgsMQcaKptaaOmy8ZmWu2ohKc85YS2l1l6D89AhIx9Qbz5sZqHZnM06qnfXRu71hxq-loEePjq3V-S2j6lT1pcrzTP_sFgH4AcbiEKB0OvQ656OJlUN2V0vIxjgpYN2LXel9j5LdyldPrYQNPcTtJBtplFeIcN0DaCgYKAXwSARESFQHGX2Mi6b7fvQFL09DLSvX1LyDpKA0171' ./pipe-each-line.py ./upload-video.py
+#
+# If you want to see the progress and have the results piped into a file, use
+# `tee` and unbuffered Python:
+#
+#     cat metadata.ndjson | YOUTUBE_ACCESS_TOKEN='ya29.a0AXooCgsMQcaKptaaOmy8ZmWu2ohKc85YS2l1l6D89AhIx9Qbz5sZqHZnM06qnfXRu71hxq-loEePjq3V-S2j6lT1pcrzTP_sFgH4AcbiEKB0OvQ656OJlUN2V0vIxjgpYN2LXel9j5LdyldPrYQNPcTtJBtplFeIcN0DaCgYKAXwSARESFQHGX2Mi6b7fvQFL09DLSvX1LyDpKA0171' ./pipe-each-line.py python3 -u ./upload-video.py 2>&1 | tee /tmp/upload.log
 
 import json, os, sys
 from operator import itemgetter
@@ -34,6 +39,7 @@ from pyyoutube.models import Video, VideoSnippet, VideoStatus
 
 YOUTUBE_MAX_TITLE_LENGTH = 100
 YOUTUBE_MAX_DESCRIPTION_LENGTH = 5000
+
 
 def upload_video(token, title, description, file_path):
     """Uploads a video to YouTube."""
@@ -52,16 +58,25 @@ def upload_video(token, title, description, file_path):
         notify_subscribers=False,
     )
 
+    # Display a progress bar when run on the console.
     response = None
     while response is None:
-        print(f"Uploading video...")
         status, response = upload.next_chunk()
         if status is not None:
-            print(f"Uploading video progress: {status.progress()}...")
+            progress = round(status.progress() * 100, 2)
+            print(f"Uploading video progress: {progress}%", end="\r")
 
     video = Video.from_dict(response)
+    # Print the successful upload as JSON in a format that can be mapped to the
+    # original metadata input file. You can join the YouTube URL via the
+    # `video_file` value.
     print(
-        f"Video file `{file_path}` was successfully uploaded to https://youtu.be/{video.id}"
+        json.dumps(
+            {
+                "video_file": file_path,
+                "youtube_url": f"https://youtu.be/{video.id}",
+            }
+        )
     )
 
 
