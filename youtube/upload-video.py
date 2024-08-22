@@ -46,8 +46,17 @@ def upload_video(token, title, description, file_path):
     cli = Client(access_token=token)
 
     body = Video(
-        snippet=VideoSnippet(title=title, description=description),
-        status=VideoStatus(privacyStatus="private"),
+        snippet=VideoSnippet(
+            title=title,
+            description=description,
+            defaultLanguage="en",
+            defaultAudioLanguage="en",
+        ),
+        status=VideoStatus(
+            privacyStatus="private",
+            license="creativeCommon",
+            selfDeclaredMadeForKids=False,
+        ),
     )
     media = Media(filename=file_path)
 
