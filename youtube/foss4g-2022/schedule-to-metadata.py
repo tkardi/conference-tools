@@ -182,6 +182,7 @@ def process_day(day, conf_prefix, videos):
 
             metadata = {
                 'video_file': video_file,
+                'date': date,
                 'persons': ', '.join(persons_list),
                 'pretalx_id': talk_id,
                 'title': title,

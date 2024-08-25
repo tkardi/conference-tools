@@ -1,2 +1,2 @@
 mistune==3.0.2
-python-youtube==0.9.4
+python-youtube @ git+https://github.com/vmx/python-youtube.git@recording-details
