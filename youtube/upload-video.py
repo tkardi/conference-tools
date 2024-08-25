@@ -90,7 +90,7 @@ def upload_video(token, title, description, file_path, date):
         json.dumps(
             {
                 "video_file": file_path,
-                "youtube_url": f"https://youtu.be/{video.id}",
+                "youtube_id": video.id,
             }
         )
     )
